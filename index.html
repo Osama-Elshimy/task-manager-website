@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="general.css" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="queries.css" />
+
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
+		<script defer src="script.js"></script>
+
+		<title>Task Board</title>
+	</head>
+	<body>
+		<div>
+			<header>
+				<h1>Task Board</h1>
+			</header>
+			<main class="main">
+				<section class="section section__not-started">
+					<h2 class="section-title">Not Started</h2>
+					<ul class="task-list" id="1">
+						<!-- 					<li draggable="true">
+						<div class="task">
+							<p class="task-description">Task 01</p>
+							<div>
+								<ion-icon
+									class="delete-icon"
+									size="small"
+									name="trash-outline"
+									aria-label="trash outline"
+									role="img"
+									class="md icon-small hydrated"></ion-icon>
+								<ion-icon
+									class="edit-icon"
+									size="small"
+									name="pencil-outline"
+									aria-label="pencil outline"
+									role="img"
+									class="md icon-small hydrated"></ion-icon>
+							</div>
+						</div>
+					</li> -->
+					</ul>
+					<button class="btn btn-add-task">+ Add</button>
+				</section>
+				<section class="section section__in-progress">
+					<h2 class="section-title">In Progress</h2>
+					<ul class="task-list" id="2"></ul>
+					<button class="btn btn-add-task">+ Add</button>
+				</section>
+				<section class="section section__completed">
+					<h2 class="section-title">Completed</h2>
+					<ul class="task-list" id="3"></ul>
+					<button class="btn btn-add-task">+ Add</button>
+				</section>
+			</main>
+
+			<div class="modal hidden" id="add-task-modal">
+				<div class="modal-content">
+					<label for="task-title"></label>
+					<input
+						type="text"
+						id="task-title"
+						name="task-title"
+						required
+						placeholder="Task title" />
+					<div class="modal-buttons">
+						<button class="btn modal-button-add">Add Task</button>
+						<button class="btn modal-button-cancel">Cancel</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="overlay hidden"></div>
+		</div>
+		<!-- <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script> -->
+	</body>
+</html>
