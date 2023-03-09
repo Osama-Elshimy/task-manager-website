@@ -16,11 +16,10 @@ let savedTasks = [];
 
 function init() {
 	renderTasksFromLocalStorage();
-	saveTasksInLocalStorage();
+	updateLocalStorage();
+	// saveTasksInLocalStorage();
 }
 init();
-
-// draggable="false"
 
 ////////////////////////////////////////////////
 // Functions
@@ -92,7 +91,8 @@ btnAddTask.addEventListener("click", function (e) {
 
 	addNewTask(modalTitleInput.value);
 
-	saveTasksInLocalStorage();
+	// saveTasksInLocalStorage();
+	updateLocalStorage();
 
 	// Clear the input field & close modal
 	closeModal();
@@ -112,7 +112,8 @@ modalTitleInput.addEventListener("keyup", function (e) {
 
 		addNewTask(modalTitleInput.value);
 
-		saveTasksInLocalStorage();
+		// saveTasksInLocalStorage();
+		updateLocalStorage();
 
 		// Clear the input field & close modal
 		closeModal();
@@ -184,30 +185,6 @@ taskLists.forEach(taskList =>
 
 //////////////////////////////////////////////////
 // Local Storage
-
-// Add tasks to local storage
-function saveTasksInLocalStorage() {
-	const parentEl = activeList.closest(".section");
-
-	const status = parentEl.classList.contains("section__not-started")
-		? "Not started"
-		: parentEl.classList.contains("section__in-progress")
-		? "In progress"
-		: "Completed";
-
-	if (modalTitleInput.value === "") {
-		return;
-	}
-
-	savedTasks.push({
-		taskTitle: modalTitleInput.value,
-		status: status,
-	});
-
-	localStorage.setItem("tasks", JSON.stringify(savedTasks));
-}
-
-////////////////////////////////
 
 // Render tasks from local storage
 function renderTasksFromLocalStorage() {
@@ -411,10 +388,10 @@ sections.forEach(section => {
 // Touch screens
 
 // Add touch event listeners to draggable items
-const draggableLists = document.querySelectorAll("#draggable-list");
+const draggableLists = document.querySelectorAll(".task-list");
 draggableLists.forEach(draggableList => {
 	// Touch event handler for starting a drag
-	draggableList.addEventListener("touchstart", touchStart.bind(this));
+	draggableList.addEventListener("touchstart", touchStart);
 
 	// Touch event handler for ending a drag
 	draggableList.addEventListener("touchend", touchEnd);
@@ -427,6 +404,7 @@ let draggedItem;
 
 function touchStart(event) {
 	draggedItem = event.target.closest(".task");
+	console.log(draggedItem);
 
 	// Store the initial touch coordinates
 	touchStartX = event.touches[0].clientX;
@@ -439,7 +417,6 @@ function touchStart(event) {
 function touchEnd(event) {
 	// Find the section where the drag ended
 	let touch = event.changedTouches[0];
-	targetSection = null;
 	let minDistance = Infinity;
 	for (let i = 0; i < sections.length; i++) {
 		let section = sections[i];
@@ -464,10 +441,10 @@ function touchEnd(event) {
 		targetSection.querySelector(".task-list").appendChild(draggedItem);
 
 		// Return to normal styles
-		sections[0].classList.remove("drag-over");
-		sections[1].classList.remove("drag-over");
-		sections[2].classList.remove("drag-over");
-		draggedItem.style.transform = `translate(0px, 0px)`;
+		sections.forEach(section => section.classList.remove("drag-over"));
+		draggedItem.style.transform = `translate(0, 0)`;
+
+		draggedItem = null;
 
 		// Update local storage
 		updateLocalStorage();
@@ -484,7 +461,8 @@ sections.forEach(section => {
 });
 
 function touchMove(event) {
-	targetSection = event.target.closest(".section");
+	// Prevent default touch event behavior
+	event.preventDefault();
 
 	// Finde closest section to movement
 	let touch = event.touches[0];
@@ -508,9 +486,6 @@ function touchMove(event) {
 		}
 	}
 
-	// Prevent default touch event behavior
-	event.preventDefault();
-
 	// Calculate the distance the finger has moved since the touch start
 	const touchX = event.touches[0].clientX;
 	const touchY = event.touches[0].clientY;
@@ -531,28 +506,3 @@ function touchLeave(event) {
 }
 
 //////////////////////////////////////////
-/*
-let touch = event.touches[0];
-let endX = touch.pageX;
-let endY = touch.pageY;
-let distanceMoved = Math.hypot(endX - startX, endY - startY);
-if (distanceMoved > 10) {
-	// adjust this threshold as needed
-	let minDistance = Infinity;
-	for (let i = 0; i < sections.length; i++) {
-		let section = sections[i];
-		let rect = section.getBoundingClientRect();
-		let distanceToSection = Math.hypot(
-			touch.clientX - rect.left - rect.width / 2,
-			touch.clientY - rect.top - rect.height / 2
-		);
-		if (distanceToSection < minDistance) {
-			minDistance = distanceToSection;
-			targetSection = section;
-		}
-	}
-	if (targetSection) {
-		// do something with targetSection
-	}
-}
-*/

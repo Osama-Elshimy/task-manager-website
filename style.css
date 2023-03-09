@@ -27,7 +27,7 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	overflow-x: hidden;
 }
 
@@ -69,6 +69,7 @@ h1 {
 	padding: 0.4rem 1.6rem;
 	margin-bottom: 1rem;
 	border-radius: 4px;
+	/* transition: all 0.2s ease-in-out; */
 
 	display: flex;
 	align-items: center;
@@ -76,8 +77,6 @@ h1 {
 	gap: 1.2rem;
 
 	max-width: 30rem;
-
-	transform: translate(0, 0);
 }
 
 .task div {
@@ -135,10 +134,6 @@ ion-icon:hover {
 	transition: all 0.5s;
 	border-radius: 4px;
 
-	/* 	min-width: 30rem;
-	max-width: 50rem;
-	width: 80%;
- */
 	width: clamp(25rem, 80%, 50rem);
 }
 
@@ -209,10 +204,11 @@ ion-icon:hover {
 	transform: scale(1.1);
 	opacity: 0.5;
 	cursor: move;
+	position: relative;
+	z-index: 100;
 }
 
 .drag-over {
 	background-color: #37866c;
-	transform: scale(1.05);
-	/* padding: 2rem; */
+	border: 2px solid #2b6854;
 }
