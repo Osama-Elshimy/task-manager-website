@@ -299,7 +299,6 @@ taskLists.forEach(task => {
 	});
 });
 
-/*
 // add event listeners for all sections
 sections.forEach(section => {
 	section.addEventListener("dragover", function (e) {
@@ -316,7 +315,7 @@ sections.forEach(section => {
 		event.preventDefault();
 		this.classList.remove("drag-over");
 
-		const node = this.querySelector('.task-list');
+		const node = this.querySelector(".task-list");
 		if (node !== dragging && node.nodeName === "LI") {
 			const draggedOver = node.getBoundingClientRect();
 			const draggedOverMiddleY = draggedOver.top + draggedOver.height / 2;
@@ -331,58 +330,15 @@ sections.forEach(section => {
 		const task = document.querySelector(".dragging");
 		if (task) {
 			const targetSection = event.target.closest(".section");
-			targetSection.querySelector(".task-list").append(task);
+			const taskList = targetSection.querySelector(".task-list");
+			console.log(taskList);
+			console.log(taskList.childElementCount);
+			if (taskList.childElementCount === 0) taskList.append(task);
 
 			updateLocalStorage();
 		}
 	});
 });
-*/
-
-//////////////////////////////////////////////////
-
-/*
-// Drag and drop
-
-// add event listeners for all tasks using event delegation
-taskLists.forEach(taskList => {
-	taskList.addEventListener("dragstart", e => {
-		if (e.target.id === "draggable-list") {
-			e.target.classList.add("dragging");
-		}
-	});
-
-	taskList.addEventListener("dragend", e => {
-		if (e.target.id === "draggable-list") e.target.classList.remove("dragging");
-	});
-});
-
-// add event listeners for all sections
-sections.forEach(section => {
-	section.addEventListener("dragover", function (e) {
-		e.preventDefault();
-		this.classList.add("drag-over");
-	});
-
-	section.addEventListener("dragleave", function (e) {
-		e.preventDefault();
-		this.classList.remove("drag-over");
-	});
-
-	section.addEventListener("drop", function (e) {
-		e.preventDefault();
-		this.classList.remove("drag-over");
-
-		const task = document.querySelector(".dragging");
-		if (task) {
-			const targetSection = e.target.closest(".section");
-			targetSection.querySelector(".task-list").append(task);
-
-			updateLocalStorage();
-		}
-	});
-});
-*/
 
 //////////////////////////////////////////
 // Touch screens
