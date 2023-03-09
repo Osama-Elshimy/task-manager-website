@@ -45,13 +45,15 @@ h1 {
 	justify-content: center;
 	flex-direction: column;
 	/* flex-wrap: wrap; */
-	gap: 4.8rem;
+	gap: 3.6rem;
 }
 
 .section {
 	flex: 1;
 	transition: all 0.4s ease-in-out;
 	border-radius: 4px;
+	padding-block: 3.6rem;
+	padding-inline: 2.4rem;
 }
 
 .section-title {
@@ -74,6 +76,8 @@ h1 {
 	gap: 1.2rem;
 
 	max-width: 30rem;
+
+	transform: translate(0, 0);
 }
 
 .task div {
@@ -209,38 +213,6 @@ ion-icon:hover {
 
 .drag-over {
 	background-color: #37866c;
-	/* transform: scale(1.05); */
-	padding: 2rem;
+	transform: scale(1.05);
+	/* padding: 2rem; */
 }
-
-/*
-	.css-button-retro--grey {
-		min-width: 130px;
-		height: 40px;
-		color: #fff;
-		padding: 5px 10px;
-		font-weight: bold;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		position: relative;
-		display: inline-block;
-		outline: none;
-		border: 1px solid #000;
-		color: #000;
-		background: transparent;
-	}
-	.css-button-retro--grey:hover:after {
-		top: 0;
-		left: 0;
-	}
-	.css-button-retro--grey:after {
-		content: "";
-		width: 100%;
-		z-index: -1;
-		position: absolute;
-		height: 100%;
-		top: 5px;
-		left: 5px;
-		transition: 0.2s;
-		background-color: #6c757d;
-	}

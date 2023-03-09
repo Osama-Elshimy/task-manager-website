@@ -41,7 +41,7 @@
 @media (min-width: 57em) {
 	.main {
 		flex-wrap: nowrap;
-		gap: 8rem;
+		gap: 6.8rem;
 	}
 
 	.task,
