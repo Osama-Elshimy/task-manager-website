@@ -331,8 +331,6 @@ sections.forEach(section => {
 		if (task) {
 			const targetSection = event.target.closest(".section");
 			const taskList = targetSection.querySelector(".task-list");
-			console.log(taskList);
-			console.log(taskList.childElementCount);
 			if (taskList.childElementCount === 0) taskList.append(task);
 
 			updateLocalStorage();
@@ -344,8 +342,7 @@ sections.forEach(section => {
 // Touch screens
 
 // Add touch event listeners to draggable items
-const draggableLists = document.querySelectorAll(".task-list");
-draggableLists.forEach(draggableList => {
+taskLists.forEach(draggableList => {
 	// Touch event handler for starting a drag
 	draggableList.addEventListener("touchstart", touchStart);
 
@@ -360,7 +357,6 @@ let draggedItem;
 
 function touchStart(event) {
 	draggedItem = event.target.closest(".task");
-	console.log(draggedItem);
 
 	// Store the initial touch coordinates
 	touchStartX = event.touches[0].clientX;
