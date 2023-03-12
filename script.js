@@ -22,6 +22,7 @@ init();
 
 ////////////////////////////////////////////////
 // Functions
+////////////////////////////////////////////////
 
 // Create and return new task (li) element
 function createNewTask(title) {
@@ -56,6 +57,7 @@ const closeModal = function () {
 
 ////////////////////////////////////////////////
 // Event Listeners
+////////////////////////////////////////////////
 
 // Open Modal
 buttons.forEach(button => {
@@ -182,8 +184,9 @@ taskLists.forEach(taskList =>
 	})
 );
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////
 // Local Storage
+////////////////////////////////////////////////
 
 // Render tasks from local storage
 function renderTasksFromLocalStorage() {
@@ -209,7 +212,7 @@ function renderTasksFromLocalStorage() {
 	});
 }
 
-////////////////////////////////////////////
+////////////////////////////////////////////////
 
 // Update Local storage
 function updateLocalStorage() {
@@ -260,8 +263,9 @@ function updateLocalStorage() {
 	localStorage.setItem("tasks", JSON.stringify(allTasksArray));
 }
 
-//////////////////////////////////////////
+////////////////////////////////////////////////
 // Dran and drop (with mouse)
+////////////////////////////////////////////////
 
 let dragging = null;
 
@@ -300,7 +304,6 @@ taskLists.forEach(task => {
 	});
 });
 
-// Add event listeners for all sections
 sections.forEach(section => {
 	section.addEventListener("dragover", function (event) {
 		event.preventDefault();
