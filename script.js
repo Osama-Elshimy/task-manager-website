@@ -352,8 +352,6 @@ let touchStartX, touchStartY;
 taskLists.forEach(task => {
 	// Touch event handler for starting a drag
 	task.addEventListener("touchstart", function (event) {
-		console.log("click");
-
 		if (event.target.nodeName === "INPUT") return;
 		if (event.target.classList.contains("icon")) return;
 
@@ -362,6 +360,7 @@ taskLists.forEach(task => {
 		// Store the initial touch coordinates
 		touchStartX = event.touches[0].clientX;
 		touchStartY = event.touches[0].clientY;
+		console.log("touchStartY: ", touchStartY);
 
 		// Add dragging class to dragged item
 		dragging.classList.add("dragging");
@@ -369,10 +368,17 @@ taskLists.forEach(task => {
 
 	// Touch event handler for ending a drag
 	task.addEventListener("touchend", function (event) {
-		// console.log("click");
-
 		// Find the section where the drag ended
 		let touch = event.changedTouches[0];
+
+		if (touch.clientY === touchStartY) {
+			console.log("No touch move detected");
+			dragging.classList.remove("dragging");
+			return;
+		}
+
+		console.log("touch: ", touch.clientY);
+
 		let minDistance = Infinity;
 		for (let i = 0; i < sections.length; i++) {
 			let section = sections[i];
