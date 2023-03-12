@@ -360,7 +360,6 @@ taskLists.forEach(task => {
 		// Store the initial touch coordinates
 		touchStartX = event.touches[0].clientX;
 		touchStartY = event.touches[0].clientY;
-		console.log("touchStartY: ", touchStartY);
 
 		// Add dragging class to dragged item
 		dragging.classList.add("dragging");
@@ -372,12 +371,9 @@ taskLists.forEach(task => {
 		let touch = event.changedTouches[0];
 
 		if (touch.clientY === touchStartY) {
-			console.log("No touch move detected");
 			dragging.classList.remove("dragging");
 			return;
 		}
-
-		console.log("touch: ", touch.clientY);
 
 		let minDistance = Infinity;
 		for (let i = 0; i < sections.length; i++) {
@@ -457,7 +453,6 @@ function touchMove(event) {
 }
 
 function touchLeave(event) {
-	console.log("touch leave");
 	// Remove drag-over class from the section
 	event.target.closest(".section").classList.remove("drag-over");
 }
