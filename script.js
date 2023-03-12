@@ -17,7 +17,6 @@ let savedTasks = [];
 function init() {
 	renderTasksFromLocalStorage();
 	updateLocalStorage();
-	// saveTasksInLocalStorage();
 }
 init();
 
@@ -45,12 +44,12 @@ const addNewTask = function (title) {
 	activeList.insertAdjacentHTML("beforeend", createNewTask(title));
 };
 
-const openModal = function (e) {
+const openModal = function () {
 	modal.classList.remove("hidden");
 	overlay.classList.remove("hidden");
 };
 
-const closeModal = function (e) {
+const closeModal = function () {
 	modal.classList.add("hidden");
 	overlay.classList.add("hidden");
 };
@@ -80,8 +79,8 @@ btnCanelTask.addEventListener("click", function () {
 });
 
 // Confirm Adding new task when the add button is clicked
-btnAddTask.addEventListener("click", function (e) {
-	e.preventDefault();
+btnAddTask.addEventListener("click", function (event) {
+	event.preventDefault();
 
 	// TEMP
 	if (modalTitleInput.value.trim() === "") {
@@ -91,7 +90,6 @@ btnAddTask.addEventListener("click", function (e) {
 
 	addNewTask(modalTitleInput.value);
 
-	// saveTasksInLocalStorage();
 	updateLocalStorage();
 
 	// Clear the input field & close modal
@@ -100,10 +98,10 @@ btnAddTask.addEventListener("click", function (e) {
 });
 
 // Confirm Adding new task when Enter is pressed
-modalTitleInput.addEventListener("keyup", function (e) {
-	e.preventDefault();
+modalTitleInput.addEventListener("keyup", function (event) {
+	event.preventDefault();
 
-	if (e.keyCode === 13 || e.key === "Enter") {
+	if (event.keyCode === 13 || event.key === "Enter") {
 		// TEMP
 		if (modalTitleInput.value.trim() === "") {
 			closeModal();
@@ -123,9 +121,9 @@ modalTitleInput.addEventListener("keyup", function (e) {
 
 // Delete task
 taskLists.forEach(taskList =>
-	taskList.addEventListener("click", function (e) {
-		if (e.target.classList.contains("delete-icon")) {
-			const parentLi = e.target.closest("li");
+	taskList.addEventListener("click", function (event) {
+		if (event.target.classList.contains("delete-icon")) {
+			const parentLi = event.target.closest("li");
 			parentLi.remove();
 		}
 
@@ -135,10 +133,10 @@ taskLists.forEach(taskList =>
 
 // Edit task
 taskLists.forEach(taskList =>
-	taskList.addEventListener("click", function (e) {
-		if (!e.target.classList.contains("edit-icon")) return;
+	taskList.addEventListener("click", function (event) {
+		if (!event.target.classList.contains("edit-icon")) return;
 
-		const parentLi = e.target.closest("li");
+		const parentLi = event.target.closest("li");
 
 		const taskTitle = parentLi.querySelector(".task-description");
 		const currentTitle = taskTitle.innerText;
@@ -163,14 +161,14 @@ taskLists.forEach(taskList =>
 
 		let keyPressed = false;
 
-		inputField.addEventListener("keyup", function (e) {
-			if (e.keyCode === 13 || e.key === "Enter") {
+		inputField.addEventListener("keyup", function (event) {
+			if (event.keyCode === 13 || event.key === "Enter") {
 				keyPressed = true;
 				handleEnterOrBlur();
 			}
 		});
 
-		inputField.addEventListener("blur", function (e) {
+		inputField.addEventListener("blur", function () {
 			// Check if the Enter was pressed
 			if (keyPressed) {
 				// Reset the flag variable to false
@@ -304,13 +302,13 @@ taskLists.forEach(task => {
 
 // Add event listeners for all sections
 sections.forEach(section => {
-	section.addEventListener("dragover", function (e) {
-		e.preventDefault();
+	section.addEventListener("dragover", function (event) {
+		event.preventDefault();
 		this.classList.add("drag-over");
 	});
 
-	section.addEventListener("dragleave", function (e) {
-		e.preventDefault();
+	section.addEventListener("dragleave", function (event) {
+		event.preventDefault();
 		this.classList.remove("drag-over");
 	});
 
@@ -367,9 +365,9 @@ taskLists.forEach(task => {
 
 	// Touch event handler for ending a drag
 	task.addEventListener("touchend", function (event) {
-		// Find the section where the drag ended
 		let touch = event.changedTouches[0];
 
+		// Check if user dragged the element or just touched it
 		if (touch.clientY === touchStartY) {
 			dragging.classList.remove("dragging");
 			return;
@@ -465,26 +463,26 @@ let currentPos = null;
 let diff = 0;
 isTouchMoving = false;
 
-function handleTouchStart(e) {
-	if (e.target.nodeName === "INPUT") return;
-	if (e.target.classList.contains("icon")) return;
+function handleTouchStart(event) {
+	if (event.target.nodeName === "INPUT") return;
+	if (event.target.classList.contains("icon")) return;
 
-	currentLi = e.target.closest(".task");
+	currentLi = event.target.closest(".task");
 	if (!currentLi) return;
 
-	initialPos = e.touches[0].clientY;
+	initialPos = event.touches[0].clientY;
 	isTouchMoving = false;
 }
 
-function handleTouchMove(e) {
-	e.preventDefault();
+function handleTouchMove(event) {
+	event.preventDefault();
 
-	if (e.target.nodeName === "INPUT") return;
-	if (e.target.classList.contains("icon")) return;
+	if (event.target.nodeName === "INPUT") return;
+	if (event.target.classList.contains("icon")) return;
 
 	if (!currentLi) return;
 
-	currentPos = e.touches[0].clientY;
+	currentPos = event.touches[0].clientY;
 	diff = currentPos - initialPos;
 
 	if (Math.abs(diff) < 10) return;

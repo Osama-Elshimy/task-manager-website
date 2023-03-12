@@ -5,18 +5,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" href="general.css" />
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="queries.css" />
+		<link rel="stylesheet" href="css/general.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/queries.css" />
 
 		<script
 			type="module"
 			src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
 
-		<title>Task Board</title>
+		<script defer src="script.js"></script>
+
+		<title>Kanban Board</title>
 	</head>
 	<body>
-		<div>
+		<div class="wrapper">
 			<header>
 				<h1>Albonyan Board</h1>
 			</header>
@@ -55,7 +57,16 @@
 			</div>
 
 			<div class="overlay hidden"></div>
+
+			<footer class="footer">
+				Coded by
+				<a
+					href="https://github.com/Osama-Elshimy"
+					target="_blank"
+					alt="A link to Osama Elshimy's GitHub profile"
+					>Osama Elshimy</a
+				>.
+			</footer>
 		</div>
-		<script src="script.js"></script>
 	</body>
 </html>
