@@ -69,7 +69,6 @@ h1 {
 	padding: 0.4rem 1.6rem;
 	margin-bottom: 1rem;
 	border-radius: 4px;
-	/* transition: all 0.2s ease-in-out; */
 
 	display: flex;
 	align-items: center;
@@ -211,3 +210,21 @@ ion-icon:hover {
 .drag-over {
 	background-color: #37866c;
 }
+
+.hover-above {
+	border-top: 2px solid blue;
+}
+
+.hover-below {
+	border-bottom: 2px solid red;
+}
+
+/* .task {
+	transition: transform 0.2s ease-in-out;
+}
+
+.hover-above,
+.hover-below {
+	transition: border-color 0.2s ease-in-out;
+}
+ */
